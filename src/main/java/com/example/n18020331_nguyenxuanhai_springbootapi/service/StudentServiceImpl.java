@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StudentServiceImpl implements  StudentService{
+public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
+
     @Override
     public Student Save(Student student) {
         return studentRepository.save(student);
@@ -35,7 +36,9 @@ public class StudentServiceImpl implements  StudentService{
     @Override
     public Student UpdateById(Long id, Student student) {
         Student student1 = studentRepository.findById(id).get();
-
+        student1.setEmail(student.getEmail());
+        student1.setFirstName(student.getFirstName());
+        student1.setLastName(student.getLastName());
         return studentRepository.save(student1);
     }
 }
