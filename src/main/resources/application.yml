@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: sapassword
+    url: jdbc:mysql://localhost:3306/studentdb
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+welcome:
+  message: 'welcome to dev'
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: qa
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: sapassword
+    url: jdbc:mysql://localhost:3306/studentdb-qa
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+welcome:
+  message: 'welcome to qa'
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: sapassword
+    url: jdbc:mysql://localhost:3306/studentdb-production
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+welcome:
+  message: 'welcome to production'
