@@ -1,6 +1,7 @@
 package com.example.n18020331_nguyenxuanhai_springbootapi.controller;
 
 import com.example.n18020331_nguyenxuanhai_springbootapi.entity.Student;
+import com.example.n18020331_nguyenxuanhai_springbootapi.model.StudentDTO;
 import com.example.n18020331_nguyenxuanhai_springbootapi.repository.StudentRepository;
 import com.example.n18020331_nguyenxuanhai_springbootapi.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,18 +19,20 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    //    @PostMapping("/students")
-//    public Student Save(@RequestBody Student student){
-//        return studentService.Save(student);
-//    }
-    @PostMapping("/employees")
-    ResponseEntity<Student> saveEmployee(@Valid  @RequestBody Student student) {
-        return new ResponseEntity<Student>(studentService.Save(student), HttpStatus.CREATED);
+    @PostMapping("/students")
+    public Student Save(@RequestBody Student student) {
+        return studentService.Save(student);
     }
 
+
     @GetMapping("/students")
-    public List<Student> GetAll() {
-        return studentService.GetAll();
+    List<StudentDTO> getAllStudents(){
+        List<Student> students = studentService.GetAll();
+        List<StudentDTO> dtoList = new ArrayList<>();
+        for (Student student : students){
+            dtoList.add(new StudentDTO(student));
+        }
+        return dtoList;
     }
 
     @GetMapping("/students/{id}")
